@@ -26,7 +26,7 @@ vue采取数据劫持和发布-订阅者模式，通过Object.defineProperty（�
 
 下面用js实现简单的双向绑定：
 
-```json
+```javascript
 <body>
   <div id="app">
     <input type="text" id="txt">
@@ -93,7 +93,7 @@ HTML5有一个新增的事件***onhashchange***，当hash值变化时，就会�
 
 hash模式的原理正是如此。栗子↓
 
-```json
+```javascript
 window.onhashchange = function(event){
   console.log(event.oldURL, event.newURL)
   let hash = location.hash.slice(1)
@@ -111,7 +111,7 @@ hash模式下，向后端请求时是不带hash的，所以就算hash值不匹�
 
 因此，我们可以在前端router的最后加一条匹配所有的规则，并使用redirect使其跳转至你想让它去的地方。
 
-```json
+```javascript
 export default new Router({
   routes: [
     {
@@ -148,7 +148,7 @@ export default new Router({
 
 浏览器历史记录策略：
 
-![o_3](G:\myRoadOfWeb\vue\我的文章\imgs\o_3.png)
+![o_3](.\imgs\o_3.png)
 
 由上图得到结论：
 
@@ -185,11 +185,11 @@ HTML5 History API新增
 ​	和1个事件：`window.onpopstate`。 
 
 ```json
-history.pushState() ：向历史记录栈中添加条目。
+history.pushState() // 向历史记录栈中添加条目。
 
-history.replaceState()：修改历史记录中的条目。
+history.replaceState() // 修改历史记录中的条目。
 
-window.onpopstate()：当历史记录栈中的激活条目变换时，就会触发popstate事件。
+window.onpopstate() // 当历史记录栈中的激活条目变换时，就会触发popstate事件。
 ```
 
 ------
@@ -214,7 +214,7 @@ window.onpopstate = funcRef //funcRef 是个函数名.
 
 咱们举个例子，假如当前网页地址为http://example.com/example.html,则运行下述代码后: 
 
-```json
+```javascript
 window.onpopstate = function(event) {
   alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
 };
@@ -239,7 +239,7 @@ history.go(2);  // 弹出 "location: http://example.com/example.html?page=3, sta
 
 总结：popstate就是history的原理所在。栗子↓
 
-```json
+```javascript
 history.pushState({color:'red'}, 'red', 'red'})
 
 window.onpopstate = function(event){
@@ -277,13 +277,13 @@ history.forward()
 
 举个栗子↓
 
-```json
+```javascript
 history.pushState({page: 1}, "title 1", "?page=1")
 ```
 
 注意pushState()能但并非只能用于history模式，例如：
 
-```json
+```javascript
 history.pushState({}, "title 1", "#hash")
 ```
 
@@ -299,7 +299,7 @@ pushState()的不同之处：
 
    例如https://cn.vuejs.org/v2/guide/computed.html下，运行以下js：
 
-   ```json
+   ```javascript
    history.pushState({page: 2}, "", "https://cn.vuejs.org/v2/guide")
    ```
 
