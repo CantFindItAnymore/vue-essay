@@ -148,7 +148,7 @@ export default new Router({
 
 浏览器历史记录策略：
 
-![o_3](.\imgs\o_3.png)
+![](https://github.com/CantFindItAnymore/vue-essay/blob/master/imgs/o_3.png?raw=true)
 
 由上图得到结论：
 

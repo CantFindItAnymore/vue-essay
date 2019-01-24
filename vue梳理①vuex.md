@@ -13,7 +13,7 @@ categories:
 
 先举个栗子：
 
-```json
+```javascript
 <template>
 	<div @click='add'>{{count}}</div>
 </template>
@@ -41,7 +41,7 @@ vuex即是一个全局的状态管理，所有组件都能使用。
 
 我们再举一个例子：
 
-```json
+```javascript
 const store = new Vuex.Store({
   state: {
     count: 0
@@ -54,7 +54,7 @@ const store = new Vuex.Store({
 })
 ```
 
-```json
+```javascript
 store.commit('increment')
 console.log(store.state.count) // -> 1
 ```
@@ -75,7 +75,7 @@ vuex使用单一状态树，一个对象就包含了所有的状态（state）�
 
 最好的办法是通过在根组件中注册store，store实例会注入到所有的子组件中，子组件（尽量在computed中）使用this.$store即可访问到。
 
-```json
+```javascript
 import store from './store/store'
 // 在根组件中注册store
 new Vue({
@@ -86,7 +86,7 @@ new Vue({
 })
 ```
 
-```json
+```javascript
 this.id = this.$store.state.Info // 获取状态state
 this.$store.commit('updateInfo') // 显示提交，触发更改状态的方法
 ```
@@ -95,14 +95,14 @@ this.$store.commit('updateInfo') // 显示提交，触发更改状态的方法
 
 辅助函数：mapState
 
-```json
+```javascript
  <div>
  	{{this.city}}
 	{{this.name}}
  </div>
 ```
 
-```json
+```javascript
 import {mapState} from 'vuex'
 export default {
   name: 'HomeHeader',
@@ -124,7 +124,7 @@ export default {
 
 getter可以理解为store的计算属性，它有两个参数：（state, getters(非必须)）。举个例子：
 
-```json
+```javascript
 const store = new Vuex.store({
   state: {
     name: 'john',
@@ -148,7 +148,7 @@ const store = new Vuex.store({
 
 getter暴露成了***store.getters***对象：
 
-```json
+```javascript
 this.$store.getters.isAdult // true
 ```
 
@@ -264,7 +264,7 @@ mutation: {
 }
 ```
 
-```json
+```javascript
 this.$store.commit({
   type: 'add',
   amount: 2
@@ -280,7 +280,7 @@ this.$store.commit({
 
 ① set方法
 
-```json
+```javascript
 Vue.set(obj, 'newProp', newValue) // 对象
 Vue.set(arr, index, newValue) // 数组
 ```

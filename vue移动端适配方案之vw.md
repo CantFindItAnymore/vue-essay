@@ -77,7 +77,7 @@ module.exports = {
 
 先安装：
 
-```json
+```javascript
 npm i -s postcss-aspect-ratio-mini postcss-px-to-viewport postcss-write-svg postcss-cssnext postcss-viewport-units cssnano
 ```
 
@@ -89,7 +89,7 @@ npm i -s -d cssnano-preset-advanced
 
 然后修改.postcssrc.js文件为：
 
-```json
+```javascript
 module.exports = {
   "plugins": {
     "postcss-import": {},
