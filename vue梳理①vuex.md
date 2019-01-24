@@ -154,7 +154,7 @@ this.$store.getters.isAdult // true
 
 当getter把其它getter作为第二个参数时，就是我计算我自己 。囧，例如： 
 
-```json
+```javascript
 getters: {
   adultNum: (state, getters) {
     return getters.isAdult.length
@@ -168,7 +168,7 @@ getters: {
 
 这种方法主要是为了给getter传参，一般用于操作store中的数组。再举个栗子：
 
-```json
+```javascript
 state: {
   list: [
     {name: 'a', age: 10}，
@@ -189,7 +189,7 @@ this.$store.getters.getNum(18)
 
 类似于mapState，getter也有自己的辅助函数：mapGetters，同样是将getters映射到组件。例子：
 
-```json
+```javascript
 import {mapGetters} from 'vuex'
 
 export defalut {
@@ -218,7 +218,7 @@ mutation相当于vuex中的事件methods，vuex中的mutation都是同步事务�
 
 我们已经知道显式提交是这样的：
 
-```json
+```javascript
 this.$store.commit('add')
 ```
 
@@ -226,7 +226,7 @@ this.$store.commit('add')
 
 指显示提交的时候传入额外的参数，载荷形式栗子：
 
-```json
+```javascript
 mutations: {
   add (state, n) {
     state.count += n
@@ -234,13 +234,13 @@ mutations: {
 }
 ```
 
-```json
+```javascript
 this.$store.commit('add', 2)
 ```
 
 其实载荷应该尽量写成一个对象来使用，这样可以包含多个字段，也更加规范。例如：
 
-```json
+```javascript
 mutations: {
   add (state, payload) {
     state.count += payload.amount
@@ -248,7 +248,7 @@ mutations: {
 }
 ```
 
-```json
+```javascript
 this.$store.commit('add', {
   amount: 2
 })
@@ -256,7 +256,7 @@ this.$store.commit('add', {
 
 另一种提交风格，对象形式(效果同上)：
 
-```json
+```javascript
 mutation: {
   add (state, payload) {
     state.count += payload.amount
@@ -287,13 +287,13 @@ Vue.set(arr, index, newValue) // 数组
 
 ② 以新换旧（其本质是改变对象或数组的引用地址）
 
-```json
+```javascript
 state.obj = {...state.obj, newProp: 123}
 ```
 
 ③ 变异方法，即数组js操作方法
 
-```json
+```javascript
 state.list.push(newProp)
 ```
 
@@ -303,13 +303,13 @@ ok,完美。
 
 我们之前说过显式提交
 
-```json
+```javascript
 this.$store.commit('xxx')
 ```
 
 另一种方法是在组件中借助辅助函数mapMutations：
 
-```json
+```js
 methods: {
   ...mapMutations([
     'add',
@@ -327,7 +327,7 @@ methods: {
 
 我们说过，在vuex中，mutation都是同步事务。栗子：
 
-```json
+```javascript
 this.$store.commit('add')
 // 显示提交后触发add 这个mutation，导致的状态（state）变更都应该在此时完成
 ```
@@ -342,7 +342,7 @@ action与mutation类似，区别在于：
 
 先举个例子：
 
-```json
+```javascript
 const store = new Vuex.store({
   state: {
     count: 1
@@ -370,7 +370,7 @@ action接受两个参数，第一个是context，第二个和mutation类似，�
 
 例子：
 
-```json
+```javascript
 actions: {
   firstAdd ({commit}) {
     commit('secondAdd')
@@ -380,7 +380,7 @@ actions: {
 
 其实以上写法是以下写法的简写形式：
 
-```json
+```javascript
 actions: {
   firstAdd (context) {
     context.commit('secondAdd')
@@ -390,7 +390,7 @@ actions: {
 
 为什么能对context进行解构赋值呢？我们将context打印出来：
 
-```json
+```javascript
 context = {
   dispatch: local.dispatch,
 　commit: local.commit,
@@ -403,7 +403,7 @@ context = {
 
 所以，以下这种写法就能理解了吧：
 
-```json
+```javascript
 actions: {
   firstAdd ({commit} = context) {
     commit('secondAdd')
@@ -416,7 +416,7 @@ actions: {
 
 为什么不直接操作mutation呢？因为action可以异步操作。
 
-```json
+```javascript
 actions: {
   firstAdd ({commit}) {
     setTimeout(() => {
@@ -430,7 +430,7 @@ action使用场景：涉及到调用异步api和分发多重mutation。
 
 和mutation类似，action的分发同样支持载荷方式和对象方式：
 
-```json
+```javascript
 // 载荷方式
 stote.dispatch('firstAdd', {
   amount: 10
@@ -445,7 +445,7 @@ store.dispatch({
 
 当然，action也有辅助函数mapActions：
 
-```json
+```javascript
 methods: {
   ...mapActions(['firstAdd'])
   // 重命名写法
@@ -459,7 +459,7 @@ methods: {
 
 最后是action的异步操作时的同步写法，借助promise或者async/await：
 
-```json
+```javascript
 actions: {
   actionA ({commit}) {
     return new Promise((resolve, reject) => {
@@ -493,7 +493,7 @@ this.$store.dispatch('actionA').then(() => {
 
 当项目足够大时，store对象会变得十分臃肿。因此我们需要将store分割为各个模块（module），每个模块有自己的state，mutation，action，getter甚至嵌套模块。例子：
 
-```json
+```javascript
 const moduleA = {
   state: {...},
   mutations: {...},
@@ -527,13 +527,13 @@ this.$store.state.b // moduleB的状态
 
 getter和mutation参数里的state指向当前模块内部的状态，即局部状态。模块外部的状态指rootState
 
-```json
+```javascript
 getter: ({state, getters, rootState}) {}
 ```
 
 对于action，局部状态为context.state,根节点状态为context.rootState
 
-```json
+```javascript
 action: ({state, commit, rootState}) {}
 ```
 
@@ -547,7 +547,7 @@ action: ({state, commit, rootState}) {}
 
 经过多次试验后，举出以下例子，应该是最简写法了：
 
-```json
+```javascript
 const state = {
   count: 0,
   gods: [
@@ -569,7 +569,7 @@ export default{
 }
 ```
 
-```json
+```javascript
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'VuexModuleTest',
