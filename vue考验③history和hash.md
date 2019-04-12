@@ -1,66 +1,4 @@
-1.vue的双向绑定是什么原理？
-
-2.vue的data为什么要写成return的形式？
-
-3.history模式和hash模式
-
-4.$.router和$.route的区别
-
-5.vue的修饰符
-
-6.vue单页面的优缺点
-
-7.computed的实现方式
-
-
-
-
-
-:grinning:下面揭晓答案↓
-
-### 一. vue的双向绑定是什么原理？
-
-vue采取数据劫持和发布-订阅者模式，通过Object.defineProperty（）来实现数据的双向绑定。
-
-当数据变动时，发布消息给订阅者，触发相应的回调函数。
-
-下面用js实现简单的双向绑定：
-
-```javascript
-<body>
-  <div id="app">
-    <input type="text" id="txt">
-    <p id="show"></p>
-	</div>
-
-  <script type="text/javascript">
-    var obj = {}
-    Object.defineProperty(obj, 'txt', {
-      get: function () {
-        return obj
-      },
-      set: function (newValue) {
-        document.getElementById('txt').value = newValue
-        document.getElementById('show').innerHTML = newValue
-      }
-    })
-    document.addEventListener('keyup', function (e) {
-      obj.txt = e.target.value
-    })
-  </script>
-</body>
-```
-------
-
-
-
-### 二. vue的data为什么要写成return的形式？
-
-------
-
-
-
-### 三. history模式和hash模式
+### history模式和hash模式
 
 现代框架利用浏览器的两个特性：hash和history实现了**前端路由**。
 
@@ -106,7 +44,7 @@ window.onhashchange = function(event){
 
 **G. 关于404页面**
 
-hash模式下，向后端请求时是不带hash的，所以就算hash值不匹配路由，后台也也不会返回404。那么页面会跳转到哪里呢？没错，空白页。怎么解决呢？:blonde_woman:↓
+hash模式下，向后端请求时是不带hash的，所以就算hash值不匹配路由，后台也也不会返回404。那么页面会跳转到哪里呢？没错，空白页。怎么解决呢？👱‍♀↓
 
 路由规则之一：路由是一条一条从上往下匹配的，若匹配成功，则不会再往下继续匹配。
 
@@ -135,13 +73,12 @@ export default new Router({
 })
 ```
 
-
-####  **2. history**
+#### **2. history**
 
 相对于hash模式，history模式给了前端更多的自由。要理解history，我们需要先了解几个概念：
 
 1. 浏览器是怎么管理历史记录栈的。
-2.  history的新特性。
+2. history的新特性。
 
 
 
@@ -233,7 +170,7 @@ history.go(2);  // 弹出 "location: http://example.com/example.html?page=3, sta
 1. 当前历史记录栈只有一个条目，就是http://example.com/example.html，条目索引为0。
 2. 添加并激活一个历史记录条目 http://example.com/example.html?page=1，条目索引为1。
 3. 添加并激活一个历史记录条目 http://example.com/example.html?page=2，条目索引为2。
-4. 修改当前激活的历史记录条目 http://ex..?page=2 变为 http://ex..?page=3，条目索引为3，条目2你号没了 :smirk:。
+4. 修改当前激活的历史记录条目 http://ex..?page=2 变为 http://ex..?page=3，条目索引为3，条目2你号没了 😏。
 5. 目前是条目3，回退到条目1。
 6. 目前是条目1，回退到条目0，即http://example.com/example.html。
 7. 目前是条目0，前进2步，到条目3。
@@ -324,7 +261,7 @@ pushState()的不同之处：
 
    但是注意基于哈希值的方式，必须将所有相关数据编码到一个短字符串里，不能存储很多信息。 
 
-3.  title是可以被浏览器使用的。
+3. title是可以被浏览器使用的。
 
 
 
@@ -353,28 +290,3 @@ pushState()和replaceState()绝对不会触发hashchange事件，即使该方法
 前进后退跳转才会触发popstate事件，pushState()和replaceState()不会。
 
 参考：https://blog.csdn.net/lla520/article/details/77894985
-
-### 四. $.router和$.route的区别
-
-------
-
-
-
-### 五. vue的修饰符
-
-.prevent
-
-.stop
-
-.self
-
-.captrue
-
-------
-
-### 六. vue单页面的优缺点
-
-
-
-
-

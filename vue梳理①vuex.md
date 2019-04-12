@@ -1,3 +1,5 @@
+
+
 ---
 title: 'vue进阶①vuex'
 date: 2018-09-22 14:07:24
@@ -205,7 +207,7 @@ export defalut {
 }
 ```
 
-```json
+```javascript
 <p>通过属性访问getter：<br/>{{this.byProperty}}</p>
 <p>通过方法访问getter：<br/>{{this.getNum(14)}}</p>
 ```
@@ -288,10 +290,10 @@ Vue.set(arr, index, newValue) // 数组
 ② 以新换旧（其本质是改变对象或数组的引用地址）
 
 ```javascript
-state.obj = {...state.obj, newProp: 123}
+state.obj = {...state.obj, newObj}
 ```
 
-③ 变异方法，即数组js操作方法
+③对于数组，还有变异方法，即数组js操作方法
 
 ```javascript
 state.list.push(newProp)
@@ -521,11 +523,11 @@ this.$store.state.b // moduleB的状态
 
 
 
-模块的局部状态
+**模块的局部状态**
 
 在模块内部，
 
-getter和mutation参数里的state指向当前模块内部的状态，即局部状态。模块外部的状态指rootState
+getter和mutation参数里的state指向当前模块内部	的状态，即局部状态。模块外部的状态指rootState
 
 ```javascript
 getter: ({state, getters, rootState}) {}
@@ -537,17 +539,18 @@ getter: ({state, getters, rootState}) {}
 action: ({state, commit, rootState}) {}
 ```
 
-好吧，我自己都不知道自己在讲什么了。。。先放这
+暂时不知道有什么用。。。先放这~
 
 
 
-命名空间namespaced
+**命名空间namespaced**
 
 模块化后，在组件中调用store的时候我怎么知道调用的哪个呢？因此要使用namespaced：true
 
 经过多次试验后，举出以下例子，应该是最简写法了：
 
 ```javascript
+// create.js
 const state = {
   count: 0,
   gods: [
@@ -559,6 +562,29 @@ const state = {
 const mutations = {
   create (state) {
     state.count++
+  }
+}
+
+export default{
+  namespaced: true,
+  state,
+  mutations
+}
+```
+
+```javascript
+// destroy.js
+const state = {
+  evils: 0,
+  dead: [
+    {name: 'sadan', level: 100},
+    {name: 'wutian', level: 98},
+    {name: 'liuermihou', level: 95}
+  ]
+}
+const mutations = {
+  destory (state) {
+    state.dead++
   }
 }
 
@@ -583,8 +609,3 @@ export default {
   }
 }
 ```
-
-
-
-
-
